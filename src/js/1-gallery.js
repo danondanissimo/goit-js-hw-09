@@ -1,3 +1,6 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const images = [
   {
     preview:
@@ -81,33 +84,7 @@ const markup = images
   .join('');
 imgGallery.insertAdjacentHTML('beforeend', markup);
 
-// imgGallery.addEventListener('click', event => {
-//   event.preventDefault();
-//   if (event.target.nodeName !== 'IMG') {
-//     return;
-//   }
-
-//   const instance = basicLightbox.create(
-//     `
-//     <div class="modal">
-// <img class="modal-image" src="${event.target.dataset.source}" alt="${event.target.alt}"/>
-//     </div>
-// `,
-//     {
-//       onShow: instance => {
-//         document.addEventListener('keydown', closeModal);
-//       },
-//       onClose: instance => {
-//         document.removeEventListener('keydown', closeModal);
-//       },
-//     }
-//   );
-
-//   function closeModal(event) {
-//     if (event.code === 'Escape') {
-//       instance.close();
-//     }
-//   }
-
-//   instance.show();
-// });
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
