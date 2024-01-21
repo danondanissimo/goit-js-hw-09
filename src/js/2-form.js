@@ -32,7 +32,7 @@ feedbackForm.addEventListener('submit', event => {
 });
 
 function loadFromLS(key = 'empty') {
-  const data = localStorage.getItem(key);
+  const data = localStorage.getItem(key) || {};
 
   try {
     const result = JSON.parse(data);
