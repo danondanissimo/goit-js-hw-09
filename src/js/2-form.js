@@ -1,13 +1,10 @@
 const feedbackForm = document.querySelector('.feedback-form');
 const STORAGE_KEY = 'feedback-form-state';
-let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-const defaultValues = { email: '', message: '' };
+let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || '';
 
 feedbackForm.addEventListener('input', event => {
-  const userEmail = event.currentTarget.elements.email.value;
-  const userMessage = event.currentTarget.elements.message.value;
-
-  console.log(userEmail, userMessage);
+  const userEmail = event.currentTarget.elements.email.value.trim();
+  const userMessage = event.currentTarget.elements.message.value.trim();
 
   const userData = {
     email: userEmail,
@@ -31,7 +28,7 @@ feedbackForm.addEventListener('submit', event => {
     console.log(formDetails);
   }
   feedbackForm.reset();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultValues));
+  localStorage.removeItem(STORAGE_KEY);
 });
 
 function loadFromLS(key = 'empty') {
@@ -44,10 +41,12 @@ function loadFromLS(key = 'empty') {
 }
 
 function restoreData() {
-  const { email, message } = loadFromLS(STORAGE_KEY);
+  const { email, message } = loadFromLS(STORAGE_KEY) || {};
 
-  feedbackForm.elements.email.value = email;
-  feedbackForm.elements.message.value = message;
+  console.log({ email, message });
+
+  feedbackForm.elements.email.value = email || '';
+  feedbackForm.elements.message.value = message || '';
 }
 
 restoreData();
