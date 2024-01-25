@@ -25,25 +25,22 @@ feedbackForm.addEventListener('submit', event => {
   } else {
     const formDetails = { email, message };
 
-    console.log(formDetails);
+    feedbackForm.reset();
+    localStorage.removeItem(STORAGE_KEY);
   }
-  feedbackForm.reset();
-  localStorage.removeItem(STORAGE_KEY);
 });
 
 function loadFromLS(key = 'empty') {
   try {
     const result = data;
     return result;
-  } catch {
+  } catch (error) {
     console.error(error);
   }
 }
 
 function restoreData() {
   const { email, message } = loadFromLS(STORAGE_KEY) || {};
-
-  console.log({ email, message });
 
   feedbackForm.elements.email.value = email || '';
   feedbackForm.elements.message.value = message || '';
