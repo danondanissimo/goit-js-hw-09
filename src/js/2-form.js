@@ -10,7 +10,7 @@ feedbackForm.addEventListener('input', event => {
     email: userEmail,
     message: userMessage,
   };
-  console.log(userData);
+
   localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
 });
 
@@ -24,7 +24,7 @@ feedbackForm.addEventListener('submit', event => {
     alert('All form fields must be filled in');
   } else {
     const formDetails = { email, message };
-
+    console.log(formDetails);
     feedbackForm.reset();
     localStorage.removeItem(STORAGE_KEY);
   }
